@@ -35,5 +35,4 @@ public static class EnvironmentDatas
     /// </summary>
     /// <value></value>
     public static string ClientKey { get { return Env.ClientKey; } }
-
 }
