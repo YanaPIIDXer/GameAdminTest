@@ -12,6 +12,9 @@ public interface IEnvironmentData
     /// </summary>
     string ApplicationKey { get; }
 
+    /// <summary>
+    /// クライアントキー
+    /// </summary>
     string ClientKey { get; }
 }
 
