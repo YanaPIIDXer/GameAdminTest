@@ -62,8 +62,13 @@ public static class APICall
 
     public static IEnumerator VerifyReceipt(string Receipt, Action<bool> Callback)
     {
-        using (var Req = UnityWebRequest.Post(Endpoint + "verify_receipt.php", Receipt))
+        using (var Req = UnityWebRequest.Post(Endpoint + "verify_receipt.php", "POST"))
         {
+            byte[] PostData = System.Text.Encoding.UTF8.GetBytes(Receipt);
+            Req.uploadHandler = (UploadHandler)new UploadHandlerRaw(PostData);
+            Req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            Req.SetRequestHeader("Content-Type", "application/json");
+
             yield return Req.SendWebRequest();
 
             VerifyReceiptResult Result = JsonUtility.FromJson<VerifyReceiptResult>(Req.downloadHandler.text);
