@@ -8,6 +8,13 @@ using UnityEngine;
 public class GetListButton : MonoBehaviour
 {
     /// <summary>
+    /// リスト表示用のView
+    /// ※汚い設計だけど仕方なし
+    /// </summary>
+    [SerializeField]
+    private GameObject TargetView = null;
+
+    /// <summary>
     /// 押された
     /// </summary>
     public void OnPressed()
