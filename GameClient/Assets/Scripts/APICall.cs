@@ -27,6 +27,15 @@ public struct PayItem
 }
 
 /// <summary>
+/// レシートチェックの結果
+/// </summary>
+[Serializable]
+public struct VerifyReceiptResult
+{
+    public bool result;
+}
+
+/// <summary>
 /// APIの呼び出し
 /// </summary>
 public static class APICall
@@ -48,6 +57,19 @@ public static class APICall
 
             PayItem[] ItemList = JsonHelper.FromJson<PayItem>(Req.downloadHandler.text);
             Callback?.Invoke(ItemList);
+        }
+    }
+
+    public static IEnumerator VerifyReceipt(string Receipt, Action<bool> Callback)
+    {
+        using (var Req = UnityWebRequest.Post(Endpoint + "verify_receipt.php", Receipt))
+        {
+            yield return Req.SendWebRequest();
+
+            VerifyReceiptResult Result = JsonUtility.FromJson<VerifyReceiptResult>(Req.downloadHandler.text);
+
+            // とりあえず仮
+            Callback?.Invoke(Result.result);
         }
     }
 }
