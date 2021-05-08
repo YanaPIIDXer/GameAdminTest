@@ -633,10 +633,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 75a25f2e-8143-4526-8db3-25c8ebbd1972
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: GameClient
+  organizationId: yanapiidxer
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
