@@ -12,6 +12,12 @@ public class GetListButton : MonoBehaviour
     /// </summary>
     public void OnPressed()
     {
-        StartCoroutine(APICall.GetPayItemList(null));
+        StartCoroutine(APICall.GetPayItemList((Items) =>
+        {
+            foreach (var Item in Items)
+            {
+                Debug.Log(Item.name + " Price:" + Item.price);
+            }
+        }));
     }
 }
