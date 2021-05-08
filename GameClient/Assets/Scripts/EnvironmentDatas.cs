@@ -25,8 +25,11 @@ public static class EnvironmentDatas
 {
     /// <summary>
     /// IEnvironmentData実装オブジェクト
+    /// HACK:元々static変数で自身のインスタンスを持たせて、そのコンストラクタでここに登録する作りにしていたのだが、
+    ///      何故かそのコンストラクタが呼ばれず死んでいる。
+    ///      本当はチェックアウト時点でエラーが発生するようなコードにはしたくなかったのだがやむ無し。
     /// </summary>
-    public static IEnvironmentData Env { set; private get; }
+    private static IEnvironmentData Env = new LocalEnvironmentData();
 
     /// <summary>
     /// アプリケーションキー

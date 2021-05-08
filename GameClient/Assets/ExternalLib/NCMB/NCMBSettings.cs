@@ -167,10 +167,18 @@ namespace NCMB
 		/// <param name="apiVersion">APIバージョン</param>
 		public static void Initialize (String applicationKey, String clientKey, String domainURL, String apiVersion)
 		{
+			// HACK:アプリケーションキー等の流出を避けるためにScript上で指定できるようにした関係でこの辺のコードにも手をつけている。
+			//      ※具体的には「すでにキーが設定されているなら何もしない」という処理。
 			// アプリケーションキーを設定
-			_applicationKey = applicationKey;
+			if (string.IsNullOrEmpty(_applicationKey))
+			{
+				_applicationKey = applicationKey;
+			}
 			// クライアントキーを設定
-			_clientKey = clientKey;
+			if (string.IsNullOrEmpty(_clientKey))
+			{
+				_clientKey = clientKey;
+			}
 			// ドメインURLを設定
 			_domainURL = string.IsNullOrEmpty (domainURL) ? CommonConstant.DOMAIN_URL : domainURL;
 			// APIバージョンを設定
@@ -222,9 +230,11 @@ namespace NCMB
 		}
 
 		/// <summary>
-		/// 初期設定を行います。
+		/// 初期化メソッド・・・と言うか、元々Awakeメソッド内でやっていた事
+		/// 元々がInspector上で機密性の高いアプリケーションキー等を設定する前提の作りになっていたので修正したもの
+		/// このメソッドを明示的に呼び出す必要がある
 		/// </summary>
-		public virtual void Awake ()
+		public void Init()
 		{
 			if (!NCMBSettings._isInitialized) {
 				NCMBSettings._isInitialized = true;
