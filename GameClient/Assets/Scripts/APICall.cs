@@ -51,7 +51,7 @@ public static class APICall
     /// <param name="Callback">コールバック</param>
     public static IEnumerator GetPayItemList(Action<PayItem[]> Callback)
     {
-        using (var Req = UnityWebRequest.Get(Endpoint + "pay_item_list.php"))
+        using (var Req = UnityWebRequest.Get("https://1bvwiok6dc.execute-api.ap-northeast-1.amazonaws.com/default/pay_item_list"))
         {
             yield return Req.SendWebRequest();
 
