@@ -110,7 +110,6 @@ public class StoreListener : MonoBehaviour, IStoreListener
     /// </summary>
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
     {
-        Debug.Log("Purchase!");
-        return PurchaseProcessingResult.Complete;
+        return PurchaseProcessingResult.Pending;
     }
 }
