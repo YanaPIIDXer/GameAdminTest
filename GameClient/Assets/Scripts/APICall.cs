@@ -41,11 +41,6 @@ public struct VerifyReceiptResult
 public static class APICall
 {
     /// <summary>
-    /// エンドポイント
-    /// </summary>
-    private static readonly string Endpoint = "http://localhost/api/";
-
-    /// <summary>
     /// 課金アイテムリスト取得
     /// </summary>
     /// <param name="Callback">コールバック</param>
@@ -55,6 +50,7 @@ public static class APICall
         {
             yield return Req.SendWebRequest();
 
+            Debug.Log(Req.downloadHandler.text);
             PayItem[] ItemList = JsonHelper.FromJson<PayItem>(Req.downloadHandler.text);
             Callback?.Invoke(ItemList);
         }
@@ -62,7 +58,7 @@ public static class APICall
 
     public static IEnumerator VerifyReceipt(string Receipt, Action<bool> Callback)
     {
-        using (var Req = UnityWebRequest.Post(Endpoint + "verify_receipt.php", "POST"))
+        using (var Req = UnityWebRequest.Post("https://4ipqjo74e7.execute-api.ap-northeast-1.amazonaws.com/default/verify_receipt", "POST"))
         {
             byte[] PostData = System.Text.Encoding.UTF8.GetBytes(Receipt);
             Req.uploadHandler = (UploadHandler)new UploadHandlerRaw(PostData);
@@ -71,6 +67,7 @@ public static class APICall
 
             yield return Req.SendWebRequest();
 
+            Debug.Log(Req.downloadHandler.text);
             VerifyReceiptResult Result = JsonUtility.FromJson<VerifyReceiptResult>(Req.downloadHandler.text);
 
             // とりあえず仮
