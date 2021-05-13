@@ -56,6 +56,11 @@ public static class APICall
         }
     }
 
+    /// <summary>
+    /// レシート検証
+    /// </summary>
+    /// <param name="Receipt">レシート</param>
+    /// <param name="Callback">コールバック</param>
     public static IEnumerator VerifyReceipt(string Receipt, Action<bool> Callback)
     {
         using (var Req = UnityWebRequest.Post("https://4ipqjo74e7.execute-api.ap-northeast-1.amazonaws.com/default/verify_receipt", "POST"))
