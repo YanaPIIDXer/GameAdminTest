@@ -111,6 +111,7 @@ public class StoreListener : MonoBehaviour, IStoreListener
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
     {
         var Result = PurchaseProcessingResult.Pending;
+        Debug.Log("Receipt:" + e.PurchaseProduct.receipt);
         StartCoroutine(APICall.VerifyReceipt(e.purchasedProduct.receipt, (isSuccess) =>
         {
             if (isSuccess)
